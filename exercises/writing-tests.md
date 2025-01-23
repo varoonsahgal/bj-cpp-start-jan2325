@@ -1,5 +1,8 @@
-Let's write some tests - go ahead and modify the blackjack_test.cpp file that's already in the tests folder.
+Practice writing tests
 ---
+
+Let's write some tests - go ahead and modify the blackjack_test.cpp file that's already in the tests folder.
+
 
 ### **Exercise 1: 🃏 Testing Card Default Constructor**  
 ```cpp
@@ -74,4 +77,3 @@ TEST(DeckTest, ShufflesDeckRandomly) {
 
 ---
 
-These exercises with emojis make the learning process more engaging and fun while still focusing on critical testing concepts. 🎉
