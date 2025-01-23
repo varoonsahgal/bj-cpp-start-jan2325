@@ -9,6 +9,7 @@ This can make the code less expressive, harder to maintain, and more prone to er
 ### Why It's Primitive Obsession:
 1. **Lack of Domain Semantics**:
    - `char` is a generic type and doesn't inherently convey the idea of a "suit."
+   -  `char` also has no inherent boundaries that are relevant to our domain problem (domain == the game of Blackjack)
    - Someone reading the code might not immediately understand that `suit` is expected to represent one of `'C'`, `'H'`, `'D'`, or `'S'`.
 
 2. **Validation Responsibility**:
@@ -16,8 +17,7 @@ This can make the code less expressive, harder to maintain, and more prone to er
    - There's no guarantee that `suit` can't be set to an invalid value, like `'X'`.
 
 3. **Repetition**:
-   - You're repeating logic for suits (e.g., in `printCardL1`, `printCardL2`, etc.).
-   - If you decide to add new suits or change how suits are represented, you'd have to modify multiple places.
+   - You'll often end up repeating logic
 
 ---
 
