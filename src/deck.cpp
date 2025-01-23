@@ -30,3 +30,8 @@ Card Deck::deal(){
     deck.erase(deck.begin()+val);
     return t;
 }
+
+// Getter Function for the deck
+std::vector<Card> Deck::getCards() {
+	return deck;
+}

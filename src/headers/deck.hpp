@@ -13,6 +13,7 @@ class Deck{
         void initializeDeck();
         int getSize();
         Card deal();
+		std::vector<Card> getCards();
 };
 
 #endif
