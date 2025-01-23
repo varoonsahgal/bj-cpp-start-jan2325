@@ -21,95 +21,18 @@ This can make the code less expressive, harder to maintain, and more prone to er
 
 ---
 
-### How to Refactor:
-You can refactor `suit` to use a dedicated class or enum. Here's how:
+### YOUR CHALLENGE EXERCISE:
+Here's what you need to do:
 
-#### **Option 1: Use an Enum**
-Define an enum for suits:
-```cpp
-enum class Suit {
-    Clubs,
-    Hearts,
-    Diamonds,
-    Spades
-};
-```
+- Refactor `suit` in the card class, to use an enum class in CPP instead of a `char`. Here's a reference on enums in CPP: https://en.cppreference.com/w/cpp/language/enum
 
-Update the `Card` class:
-```cpp
-#include "headers/card.h"
-#include <iostream>
+- Define an enum for suits, then modify the constructor for the Card class to use that enum.  
 
-Card::Card() : number(0), suit(Suit::Clubs), block(false) {}
+- Then, update any calls to the Card constructor.  Finally, test out the project and see if it works.
 
-Card::Card(int no, Suit s) : number(no), suit(s), block(false) {}
+- You should also add a new test case to ensure the new constructor works as intended.
 
-Suit Card::getSuit() {
-    return suit;
-}
 
-void Card::setSuit(Suit s) {
-    suit = s;
-}
-
-void Card::printCardL1() {
-    switch (suit) {
-        case Suit::Clubs: std::cout << "| :(): |"; break;
-        case Suit::Hearts: std::cout << "| (\\/) |"; break;
-        case Suit::Diamonds:
-        case Suit::Spades: std::cout << "| :/\\: |"; break;
-    }
-}
-```
-
-#### **Option 2: Use a Suit Class**
-Create a dedicated `Suit` class:
-```cpp
-class Suit {
-private:
-    char symbol; // 'C', 'H', 'D', 'S'
-
-public:
-    Suit(char s) {
-        if (s != 'C' && s != 'H' && s != 'D' && s != 'S') {
-            throw std::invalid_argument("Invalid suit");
-        }
-        symbol = s;
-    }
-
-    char getSymbol() const { return symbol; }
-
-    void printL1() const {
-        switch (symbol) {
-            case 'C': std::cout << "| :(): |"; break;
-            case 'H': std::cout << "| (\\/) |"; break;
-            case 'D':
-            case 'S': std::cout << "| :/\\: |"; break;
-        }
-    }
-};
-```
-
-Use the `Suit` class in `Card`:
-```cpp
-class Card {
-private:
-    int number;
-    Suit suit;
-    bool block;
-
-public:
-    Card() : number(0), suit('C'), block(false) {}
-    Card(int no, char s) : number(no), suit(s), block(false) {}
-
-    Suit getSuit() const { return suit; }
-    void setSuit(char s) { suit = Suit(s); }
-
-    void printCardL1() {
-        suit.printL1();
-    }
-};
-```
 
 ---
 
@@ -118,10 +41,10 @@ public:
    - Code becomes more self-documenting (`Suit` is FAR more descriptive than `char`).
 
 2. **Error Prevention**:
-   - Invalid suits are caught at compile-time (using enums) or runtime (using the `Suit` class if we were to use a class instead).
+   - Invalid suits are caught at compile-time (using enums) or runtime (using the `Suit` class if we were to use a class instead of an enum).
 
 3. **Encapsulation**:
-   - Suit-related behavior (like printing) is encapsulated within the `Suit` enum, reducing duplication.
+   - Suit-related behavior (like printing) could be encapsulated within the `Suit` enum, reducing duplication.
 
 4. **Scalability**:
    - Adding new suits or changing suit-related logic is easier and localized.
