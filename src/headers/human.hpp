@@ -17,6 +17,7 @@ class Human{
         void addCard(Card c);
         void clearCards();
         void printCards();
+		bool isBlackjack();
 };
 
 #endif

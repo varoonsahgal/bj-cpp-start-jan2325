@@ -2,6 +2,9 @@
 #include "card.h"  // Include the header for your Card class
 #include "deck.hpp"  // Include the header for your Deck class
 #include <iostream>
+#include "player.hpp"
+#include "dealer.hpp"
+
 
 
 // Test default constructor
@@ -125,6 +128,56 @@ TEST(CardTest, PrintsCardCorrectly) {
     std::string output = oss.str();
     EXPECT_NE(output.find("| (\\/) |"), std::string::npos); // Check for Hearts' L1
     EXPECT_NE(output.find("| :\\/: |"), std::string::npos); // Check for Hearts' L2
+}
+
+// test out dealer for blackjack
+// test out for 3 cards - does that register as blackjack?
+// refactor the game.cpp class to use the new isBlackjack function
+
+TEST(TDDTest, PlayerTestForBlackjack) {
+    Card heartCard(1, 'H'); // Ace of Hearts
+    Card clubCard(10, 'C'); // 10 of Clubs
+
+	Player player;
+	player.addCard(heartCard);
+	player.addCard(clubCard);
+
+	//EXPECT_EQ(player.getSum(), 21); // 21 is blackjack
+
+    //TDD: we want to write a failing test first, then write min implementation for a new isBlackjack function
+    // we want an isblackjack function that lives in the Human class, and we want to validate that 
+	//if we create a player or a dealer, and add 2 cards, one of which is an Ace and the other is a 10, that the function returns true
+
+	//is blackjack does not exist yet, so this will fail - our goal is to add this function to the human class
+    //and do it in a TDD way!
+	EXPECT_TRUE(player.isBlackjack());
+
+
+    //  else if(dealer.getSum() == 21 || player.getSum() == 21){
+
+}
+
+TEST(TDDTest, DealerTestForBlackjack) {
+    Card heartCard(1, 'H'); // Ace of Hearts
+    Card clubCard(10, 'C'); // 10 of Clubs
+
+    Dealer dealer;
+    dealer.addCard(heartCard);
+    dealer.addCard(clubCard);
+
+    //EXPECT_EQ(player.getSum(), 21); // 21 is blackjack
+
+    //TDD: we want to write a failing test first, then write min implementation for a new isBlackjack function
+    // we want an isblackjack function that lives in the Human class, and we want to validate that 
+    //if we create a player or a dealer, and add 2 cards, one of which is an Ace and the other is a 10, that the function returns true
+
+    //is blackjack does not exist yet, so this will fail - our goal is to add this function to the human class
+    //and do it in a TDD way!
+    EXPECT_TRUE(dealer.isBlackjack());
+
+
+    //  else if(dealer.getSum() == 21 || player.getSum() == 21){
+
 }
 
 

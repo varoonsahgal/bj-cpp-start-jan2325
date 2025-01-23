@@ -43,6 +43,12 @@ void Human::clearCards(){
     sum = 0;
 }
 
+// Checks if Human has Blackjack
+bool Human::isBlackjack() {
+    //return false;
+    return hand.size() == 2 && sum == 21;
+}
+
 // Prints Human's cards
 void Human::printCards(){
     std::cout<<"\n";

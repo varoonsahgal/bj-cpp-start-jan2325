@@ -62,10 +62,10 @@ char Game::checkEnd(){
         printTop();
         std::cout << red << Print::bust() << def << "\n    [Dealer : " << dealer.getSum() << " | " << player.getName() << " : " << player.getSum() << "]\n";
         return dealer.getSum() > 21 ? 'p' : 'd';
-    } else if(dealer.getSum() == 21 || player.getSum() == 21){
+    } else if(dealer.isBlackjack() || player.isBlackjack()) {
         printTop();
         std::cout << lightGreen << Print::blackjack() << def << "\n    [Dealer : " << dealer.getSum() << " | " << player.getName() << " : " << player.getSum() << "]\n";
-        return dealer.getSum() == 21 ? 'd' : 'p';
+        return dealer.isBlackjack() ? 'd' : 'p';
     }
     return 'f';
 }
