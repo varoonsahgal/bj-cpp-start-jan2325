@@ -236,4 +236,104 @@ int main() {
 2. **Testability**: You can mock `DatabasePort` for unit tests.
 3. **Flexibility**: Swap the adapter (e.g., file-based, SQL database) without modifying domain logic.
 
-Let me know if you need further clarifications or refinements!
+
+---
+
+### **SOLID Principles Applied**
+Implementing the **Ports and Adapters** pattern in your Blackjack game ensures the architecture adheres to several **SOLID** principles:
+
+---
+
+#### **1. Single Responsibility Principle (SRP)**
+**Definition**: A class should have only one reason to change.
+
+- **Application**:
+  - The `DatabasePort` interface defines what database operations are required, but it does not handle the specifics of implementation.
+  - The `FileDatabaseAdapter` class handles only the specifics of interacting with the file-based database.
+  - The `Game` class focuses on domain-specific game logic and delegates database operations to the port.
+
+- **Benefit**:
+  - Changes to the database logic (e.g., switching to an SQL database) do not require changes in the `Game`, `Player`, or `Dealer` classes.
+
+---
+
+#### **2. Open/Closed Principle (OCP)**
+**Definition**: Classes should be open for extension but closed for modification.
+
+- **Application**:
+  - The `Game` class depends on the `DatabasePort` interface, allowing the database implementation to be swapped out without modifying the `Game` class.
+  - For example, replacing `FileDatabaseAdapter` with an `SQLDatabaseAdapter` requires no changes to `Game`.
+
+- **Benefit**:
+  - You can extend the system with new database adapters without modifying existing code.
+
+---
+
+#### **3. Liskov Substitution Principle (LSP)**
+**Definition**: Subtypes must be substitutable for their base types.
+
+- **Application**:
+  - The `FileDatabaseAdapter` class is a concrete implementation of `DatabasePort`. It can be substituted with any other adapter implementing `DatabasePort` (e.g., `SQLDatabaseAdapter`) without breaking the `Game` class.
+
+- **Benefit**:
+  - Ensures consistency and prevents runtime errors when using different database implementations.
+
+---
+
+#### **4. Interface Segregation Principle (ISP)**
+**Definition**: A class should not be forced to depend on methods it does not use.
+
+- **Application**:
+  - The `DatabasePort` interface is designed to include only the methods necessary for database interactions (`saveGame` and `loadGame`). It does not include unrelated functionality.
+  - The `Game` class interacts only with the specific methods it needs via `DatabasePort`.
+
+- **Benefit**:
+  - Promotes a clean separation of responsibilities and ensures minimal coupling between components.
+
+---
+
+#### **5. Dependency Inversion Principle (DIP)**
+**Definition**: High-level modules should not depend on low-level modules but on abstractions.
+
+- **Application**:
+  - The `Game` class depends on the `DatabasePort` abstraction rather than a specific database implementation like `FileDatabaseAdapter`.
+  - The actual database implementation is injected into the `Game` class at runtime.
+
+- **Benefit**:
+  - Decouples the `Game` class from specific database implementations, making the system more flexible and testable.
+
+---
+
+### **Law of Demeter (LoD)**
+**Definition**: A class should only interact with its immediate dependencies and avoid "talking to strangers."
+
+**Application**:
+- By using a port (`DatabasePort`), the `Game` class interacts with a single dependency to perform database operations, rather than directly interacting with low-level database code (e.g., file I/O or SQL queries).
+- Instead of:
+  ```cpp
+  file.open("data.dat", std::ios::binary);
+  // Logic to save/load directly in Game
+  ```
+  The `Game` class delegates the responsibility:
+  ```cpp
+  database.saveGame(player, dealer, deck, "data.dat");
+  ```
+
+**Benefit**:
+- This minimizes coupling and ensures the `Game` class adheres to the **Law of Demeter**, as it only communicates with its direct dependency (`DatabasePort`) and not with the low-level implementation (`FileDatabaseAdapter`).
+
+---
+
+### **Summary of SOLID and LoD**
+1. **SRP**: Each class has a clear responsibility.
+2. **OCP**: New adapters can be added without modifying existing classes.
+3. **LSP**: Any adapter implementing `DatabasePort` can replace `FileDatabaseAdapter`.
+4. **ISP**: `DatabasePort` is focused only on necessary methods.
+5. **DIP**: High-level domain classes depend on an abstraction (`DatabasePort`) instead of a specific implementation.
+
+By adhering to these principles and factoring in the **Law of Demeter**, your code becomes:
+- **More modular**: Components are easier to test, reuse, and replace.
+- **More maintainable**: Changes to one part of the system have minimal impact on others.
+- **Extensible**: New database implementations can be added without altering domain logic.
+
+
