@@ -1,5 +1,7 @@
 Implementing the **Ports and Adapters (Hexagonal Architecture)** pattern involves creating a **port** as an abstraction for database interactions, ensuring that domain classes like `Game`, `Player`, or `Hand` do not depend directly on the database. Here's a detailed breakdown and all the code required to implement this in the Blackjack game:
 
+Added note: to enforce that dependencies flow inwards and no domain logic references an adapter, you can use tools like CLang-Tidy.
+
 ---
 
 ## **1. Define the Goal**
