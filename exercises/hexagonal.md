@@ -14,9 +14,9 @@ Hexagonal/clean architecture - Game class
 ---
 Next do the same thing for the Game class as well!  Move all console based code into a new class called `ConsoleGame`.  Then update all references as well.
 
-This will help us build towards a Hexagonal architecture.
+This will help us build towards a Hexagonal architecture.  If you think there are other classes that need to remove any display logic then refactor those as well!
 
-Refactoring to use the `ConsoleCard` class applies several **SOLID principles**, including:
+Refactoring to use the `ConsoleCard` and `ConsoleGame` classes applies several **SOLID principles**, including:
 
 ---
 
